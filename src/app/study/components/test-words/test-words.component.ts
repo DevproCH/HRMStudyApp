@@ -149,10 +149,12 @@ export class TestWordsComponent {
         }
       );
 
-      this.loadNextQuestion();
       if (this.examSettings !== null) {
         this.dataManager.setExamData(this.examSettings);
       }
+
+      this.loadNextQuestion();
+
     }
   }
 

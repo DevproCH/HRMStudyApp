@@ -1,0 +1,54 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h3 style="width: 100%;">Exam</h3>
+  </mat-card-header>
+
+
+  <mat-card-content *ngIf="examNotStarted">
+    <form [formGroup]="startExamForm" novalidate (ngSubmit)="startExam()">
+      <mat-form-field color="accent" appearance="outline" class="full-width">
+        <mat-label>Number of Words (0 for all words)</mat-label>
+        <input class="full-width" placeholder="10" matInput formControlName="numberOfWords" type="number">
+        <mat-error *ngIf="startExamForm.controls['numberOfWords'].invalid && startExamForm.controls['numberOfWords'].touched">Invalid Input
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline" class="full-width">
+        <mat-label>Timelimit in Seconds (0 for unlimited time)</mat-label>
+        <input class="full-width" placeholder="0" matInput formControlName="timelimit" type="number">
+        <mat-error *ngIf="startExamForm.controls['timelimit'].invalid && startExamForm.controls['timelimit'].touched">Invalid Input
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline" class="full-width">
+        <mat-label>Goal in %</mat-label>
+        <input class="full-width" placeholder="75" matInput formControlName="goal" type="number">
+        <mat-error *ngIf="startExamForm.controls['goal'].invalid && startExamForm.controls['goal'].touched">Invalid Input
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button [disabled]="!startExamForm.valid" type="submit" color="accent">Start Exam</button>
+      </div>
+    </form>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="!examNotStarted">
+    <ng-container *ngIf="examSettings?.finished">
+      <app-test-words-result [examSettings]="examSettings" (reviewFinished)="resetExam();">
+
+      </app-test-words-result>
+    </ng-container>
+
+    <ng-container *ngIf="!examSettings?.finished">
+      <h5 *ngIf="examSettings?.hasTimeLimit">This exam has a time limit. Remaining time: {{remainingTime}} </h5>
+      <h5 *ngIf="!examSettings?.hasTimeLimit">This exam has no time limit. Take your time.</h5>
+
+      <app-answer-form [currentQuestion]="currentQuestion" [testedLanguage]="testedLanguage" (submittedAnswer)="submitAnswer($event);"></app-answer-form>
+
+
+      <button (click)="stopExam(true);" style="margin-top: 30px;" mat-raised-button color="accent">Cancel Attempt</button>
+
+    </ng-container>
+  </mat-card-content>
+</mat-card>

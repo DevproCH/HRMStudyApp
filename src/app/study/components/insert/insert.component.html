@@ -1,0 +1,111 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h3 style="width: 100%;">Insert</h3>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="updateLanguageForm" novalidate (ngSubmit)="updateLanguage()">
+      <mat-form-field color="accent" class="full-width" appearance="outline">
+        <mat-label>Language</mat-label>
+        <input class="full-width" placeholder="Language" matInput formControlName="language1" type="text">
+        <mat-error *ngIf="updateLanguageForm.controls['language1'].invalid && updateLanguageForm.controls['language1'].touched">Invalid Input
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" class="full-width" appearance="outline">
+        <mat-label>Language</mat-label>
+        <input class="full-width" placeholder="Language" matInput formControlName="language2" type="text">
+        <mat-error *ngIf="updateLanguageForm.controls['language2'].invalid && updateLanguageForm.controls['language2'].touched">Invalid Input
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button [disabled]="!updateLanguageForm.valid" type="submit" color="accent">Change Language</button>
+      </div>
+    </form>
+
+
+    <div class="limiter">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort style="max-width: 100%">
+        <ng-container matColumnDef="language1">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> {{vocabularyData.language1Name}} </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!element.modification">
+              {{element.word1}}
+            </ng-container>
+            <ng-container *ngIf="element.modification">
+              <form [formGroup]="editForm">
+                <mat-form-field appearance="outline" class="no-sub">
+                  <input matInput formControlName="word1" [(ngModel)]="element.word1">
+                </mat-form-field>
+              </form>
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="language2">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> {{vocabularyData.language2Name}} </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!element.modification">
+              {{element.word2}}
+            </ng-container>
+            <ng-container *ngIf="element.modification">
+              <form [formGroup]="editForm">
+                <mat-form-field appearance="outline" class="no-sub">
+                  <input matInput formControlName="word2" [(ngModel)]="element.word2">
+                </mat-form-field>
+              </form>
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="options">
+          <th mat-header-cell *matHeaderCellDef> Manage </th>
+          <td mat-cell *matCellDef="let element">
+            <button *ngIf="!element.modification" mat-button color="primary" (click)="toggleDetails(element);" >Details</button>
+            <button *ngIf="element.modification" mat-button color="primary" (click)="saveWord(element);" >Save</button>
+            <button *ngIf="element.modification" mat-button color="primary" (click)="deleteWord(element.id);" >Delete</button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="insert-word-1">
+          <td mat-footer-cell *matFooterCellDef colspan="1">
+            <form [formGroup]="insertForm">
+              <mat-form-field appearance="outline" class="no-sub">
+                <input matInput formControlName="word1" placeholder="Word 1">
+              </mat-form-field>
+            </form>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="insert-word-2">
+          <td mat-footer-cell *matFooterCellDef colspan="1">
+            <form [formGroup]="insertForm">
+              <mat-form-field appearance="outline" class="no-sub">
+                <input matInput formControlName="word2" placeholder="Word 2">
+              </mat-form-field>
+            </form>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="insert-word-button">
+          <td mat-footer-cell *matFooterCellDef colspan="1">
+            <button mat-raised-button color="primary" (click)="insertPair()">Insert</button>
+          </td>
+        </ng-container>
+
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="['insert-word-1', 'insert-word-2', 'insert-word-button']" class=""></tr>
+
+      </table>
+    </div>
+  </mat-card-content>
+
+
+
+</mat-card>

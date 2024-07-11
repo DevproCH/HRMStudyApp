@@ -1,0 +1,37 @@
+<p>You have finished the Exam</p>
+<p>Startdate: {{examSettings?.startTime | date : "EEEE dd-MM-YYYY hh:mm:ss"}}</p>
+<p>Enddate: {{examSettings?.endTime | date : "EEEE dd-MM-YYYY hh:mm:ss"}}</p>
+<p>Correct Answers: {{numberOfCorrectAnswers}}</p>
+<p>Wrong Answers: {{numberOfWrongAnswers}}</p>
+<p>Number of Questions: {{numberOfQuestions}}</p>
+
+<p>Ratio: {{ratio}}</p>
+<p>Goal: {{goal}}</p>
+
+
+<p *ngIf="ratio >= goal" style="color: green">You have passed the exam</p>
+<p *ngIf="ratio < goal" style="color: red">You have failed the exam</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="question">
+    <th mat-header-cell *matHeaderCellDef> Question </th>
+    <td mat-cell *matCellDef="let element"> {{element.question}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="answer">
+    <th mat-header-cell *matHeaderCellDef> Answer </th>
+    <td mat-cell *matCellDef="let element"> {{element.answer}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="correctAnswer">
+    <th mat-header-cell *matHeaderCellDef> Correct Answer </th>
+    <td mat-cell *matCellDef="let element"> {{element.correctAnswer}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<button (click)="finishReview();" mat-raised-button color="accent">Finish Review</button>
+

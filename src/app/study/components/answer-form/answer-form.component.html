@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-content class="center-items">
+    <p>
+      {{testedLanguage}}
+    </p>
+    <p>
+      {{currentQuestion}}
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-content class="center-items">
+    <p>
+      Please Translate this Word
+    </p>
+    <form [formGroup]="testLanguageForm" novalidate (ngSubmit)="submitAnswer()">
+      <mat-form-field color="accent" class="full-width">
+        <mat-label>Answer</mat-label>
+        <input class="full-width" placeholder="Your Answer" matInput formControlName="answer" type="text">
+        <mat-error *ngIf="testLanguageForm.controls['answer'].invalid && testLanguageForm.controls['answer'].touched">Invalid Input
+        </mat-error>
+      </mat-form-field>
+
+
+      <div>
+        <button mat-raised-button [disabled]="!testLanguageForm.valid" type="submit" color="accent">Check Translation</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

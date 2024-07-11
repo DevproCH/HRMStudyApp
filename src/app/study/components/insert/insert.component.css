@@ -1,0 +1,78 @@
+mat-card {
+  margin-top: 30px;
+}
+
+form {
+  display: flex;
+  align-items: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+mat-form-field {
+  width: 49%;
+}
+
+form > div {
+  display: inline-block;
+  flex-grow: 1;
+}
+
+td > form > mat-form-field {
+  width: 100%;
+}
+
+table {
+  margin-top: 50px;
+}
+
+.no-sub{
+  margin: 15px 0;
+}
+
+.limiter {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.mat-column-language1 {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 17% !important;
+  width: 17% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-language2 {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 8% !important;
+  width: 8% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-options {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 10% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
